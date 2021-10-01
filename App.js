@@ -3,23 +3,18 @@ import { StatusBar } from 'expo-status-bar';
 import axios from 'axios'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
-
-import * as Permissions from 'expo-permissions';
 import React, {useState, useEffect, useRef} from 'react';
 import styles from './styles.js';
 import {
     Alert,
     Modal,
-    StyleSheet,
     Text,
     Pressable,
     View,
     ImageBackground,
     ScrollView,
-    TextInput,
     Animated,
-    Icon,
-    Button
+
 } from 'react-native';
 const thunder=(require('./assets/pexels-takenbytablo-680940.jpg'))
 const rain=(require('./assets/fotografierende-3ENfnnjbdJs-unsplash.jpg'))
@@ -89,7 +84,7 @@ function App() {
     };
 
     const renderCurrentCity = async (value) => {
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${value.lat},${value.long}&result_type=locality&key=AIzaSyDvCR0ZmrB9rVe4QUlW_xReyZN4Wr5ezRg`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${value.lat},${value.long}&result_type=${key}`)
 
             .then((response) => {
                 let location = (response.data.results[0].formatted_address)
@@ -170,7 +165,7 @@ function App() {
 
     const getAxis = async (value)=>{
         let temp = []
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=AIzaSyDvCR0ZmrB9rVe4QUlW_xReyZN4Wr5ezRg`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=${key}`)
 
             .then((response) => {
                 temp = {
@@ -272,7 +267,7 @@ function App() {
                             }}
                             placeholder="Search"
                             query={{
-                                key: 'AIzaSyDvCR0ZmrB9rVe4QUlW_xReyZN4Wr5ezRg',
+                                key: `${key}`,
                                 language: 'en', // language of the results
                             }}
 
